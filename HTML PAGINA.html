@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGEFUPRO - Sistema de Gestión</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d121c;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            padding-top: 20px;
+        }
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 30px; 
+            width: 100%;
+            max-width: 450px; 
+        }
+
+        .header-logo {
+            width: 80px; 
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .header-app-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00c853; 
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-slogan {
+            font-size: 14px;
+            color: #aaa;
+            font-style: italic;
+            margin: 5px 0 0 0;
+        }
+
+        .app-container { 
+            width: 100%; 
+            max-width: 450px; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+        
+        .screen {
+            background-color: #1a2230;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid #333;
+            display: none; 
+            animation: fadeIn 0.4s ease;
+            box-sizing: border-box;
+        }
+        
+        .screen.active { display: block !important; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        
+        h2 { margin-bottom: 20px; font-size: 22px; color: white; }
+        
+        .form-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; color: #aaa; }
+        
+        .input-wrapper { position: relative; }
+        .input-wrapper input {
+            width: 100%; padding: 12px 10px 12px 40px; border-radius: 6px;
+            border: 1px solid #333; background-color: #242d3e; color: white; box-sizing: border-box;
+        }
+        .input-wrapper .material-symbols-outlined { 
+            position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #00c853; 
+        }
+
+        .btn-primary {
+            width: 100%; padding: 12px; background-color: #00c853; color: #081017;
+            border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin: 10px 0;
+            font-size: 16px;
+        }
+        .btn-secondary {
+            display: block; width: 100%; padding: 10px; margin-top: 10px;
+            border-radius: 6px; border: 1px solid #333; color: #00c853; background: none; cursor: pointer;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .info-card { text-align: left; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #00c853; background: rgba(0, 200, 83, 0.05); }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <img src="SIGEFUPRO.png" alt="Logo SIGEFUPRO" class="header-logo" onerror="this.src='https://via.placeholder.com/80x80?text=LOGO';">
+        <h1 class="header-app-name">SIGEFUPRO</h1>
+        <p class="header-slogan">"Insistir, persistir y nunca desistir"</p>
+    </header>
+    <div class="app-container">
+        
+        <div id="screen-login" class="screen active">
+            <h2>Autenticación</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-outlined">person</span>
+                        <input type="text" id="login-usuario" required placeholder="admin o tu nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input type="password" id="login-password" required placeholder="1234">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Entrar al Sistema</button>
+            </form>
+            <button class="btn-secondary" onclick="navegarA('screen-register')">¿No tienes cuenta? Regístrate</button>
+        </div>
+
+        <div id="screen-register" class="screen">
+            <h2>Nuevo Futbolista</h2>
+            <form id="registerForm">
+                <div class="grid-2">
+                    <div class="form-group"><label>Nombres</label><input type="text" id="reg-nombres" class="btn-secondary" style="color:white; text-align:left" required></div>
+                    <div class="form-group"><label>Apellidos</label><input type="text" id="reg-apellidos" class="btn-secondary" style="color:white; text-align:left" required></div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group"><label>Cédula</label><input type="number" id="reg-cedula" class="btn-secondary" style="color:white; text-align:left" required></div>
+                    <div class="form-group"><label>Nacimiento</label><input type="date" id="reg-fecha" class="btn-secondary" style="color:white; text-align:left" required></div>
+                </div>
+                <div class="form-group">
+                    <label>Crea tu Contraseña</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input type="password" id="reg-password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Registrar y Guardar</button>
+            </form>
+            <button class="btn-secondary" onclick="navegarA('screen-login')">Volver al Login</button>
+        </div>
+
+        <div id="screen-list" class="screen">
+            <h2>Panel de Control (Admin)</h2>
+            <div style="overflow-x: auto; margin-top: 15px;">
+                <table style="width: 100%; border-collapse: collapse; background: #242d3e; border-radius: 8px;">
+                    <thead>
+                        <tr style="background: #00c853; color: #081017;">
+                            <th style="padding: 10px;">Jugador</th>
+                            <th style="padding: 10px;">Cédula</th>
+                            <th style="padding: 10px;">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-futbolistas"></tbody>
+                </table>
+            </div>
+            <button class="btn-secondary" onclick="navegarA('screen-login')" style="color: #ff4d4d; border-color: #ff4d4d; margin-top: 20px;">Cerrar Sesión</button>
+        </div>
+
+        <div id="screen-user-home" class="screen">
+            <span class="material-symbols-outlined" style="font-size: 50px; color: #00c853;">sports_soccer</span>
+            <h2 id="welcome-user">¡Bienvenido!</h2>
+            <div class="info-card">
+                <p><strong>Estado:</strong> Jugador Activo</p>
+                <p id="user-details"></p>
+            </div>
+            <button class="btn-primary" onclick="alert('Funcionalidad de ficha técnica en desarrollo...')">Ver mi Ficha</button>
+            <button class="btn-secondary" onclick="navegarA('screen-login')" style="color: #ff4d4d; border-color: #ff4d4d;">Cerrar Sesión</button>
+        </div>
+
+    </div>
+
+    <script>
+        function navegarA(idDestino) {
+            document.querySelectorAll('.screen').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none'; 
+            });
+            const destino = document.getElementById(idDestino);
+            if (destino) {
+                destino.classList.add('active');
+                destino.style.display = 'block';
+            }
+        }
+
+        function cargarLista() {
+            const tabla = document.getElementById('tabla-futbolistas');
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            tabla.innerHTML = "";
+            usuarios.forEach((user, index) => {
+                tabla.innerHTML += `
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px;">${user.nombres}</td>
+                        <td style="padding: 10px;">${user.cedula}</td>
+                        <td style="padding: 10px;">
+                            <button onclick="eliminarUsuario(${index})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        function eliminarUsuario(index) {
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            usuarios.splice(index, 1);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            cargarLista();
+        }
+
+        document.getElementById('loginForm').onsubmit = (e) => {
+            e.preventDefault();
+            const u = document.getElementById('login-usuario').value;
+            const p = document.getElementById('login-password').value;
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const userFound = usuarios.find(user => user.nombres === u && user.password === p);
+
+            if (u === "admin" && p === "1234") {
+                alert("Entrando como Administrador");
+                cargarLista();
+                navegarA('screen-list');
+            } else if (userFound) {
+                document.getElementById('welcome-user').innerText = "¡Hola, " + userFound.nombres + "!";
+                document.getElementById('user-details').innerText = "Cédula: " + userFound.cedula;
+                navegarA('screen-user-home');
+            } else {
+                alert("Usuario o clave incorrectos.");
+            }
+        };
+
+        document.getElementById('registerForm').onsubmit = (e) => {
+            e.preventDefault();
+            const nuevo = {
+                nombres: document.getElementById('reg-nombres').value,
+                apellidos: document.getElementById('reg-apellidos').value,
+                cedula: document.getElementById('reg-cedula').value,
+                password: document.getElementById('reg-password').value
+            };
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            usuarios.push(nuevo);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            alert("¡Registro exitoso!");
+            e.target.reset();
+            navegarA('screen-login');
+        };
+    </script>
+</body>
+</html>
